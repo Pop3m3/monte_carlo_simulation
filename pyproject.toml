@@ -5,9 +5,17 @@ description = "monte carlo simulation"
 authors = ["Your Name <you@example.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "src" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+matplotlib = "^3.10.0"
+pandas = "^2.2.3"
+openpyxl = "^3.1.5"
+arabic-reshaper = "^3.0.0"
+python-bidi = "^0.6.3"
 
 
 [build-system]
