@@ -1,0 +1,14 @@
+[MASTER]
+
+[MESSAGES CONTROL]
+disable=
+    missing-docstring,
+    too-many-arguments,
+    too-many-locals,
+    line-too-long,
+    import-error,
+    redefined-outer-name,
+    unused-variable,
+    wrong-import-order,
+    unspecified-encoding,
+    invalid-name

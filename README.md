@@ -8,6 +8,7 @@ This project implements a Monte Carlo simulation for trading strategies. The sim
 - Bilingual support (English and Persian)
 - Visualize balance changes over trades using Matplotlib
 - Export simulation results to an Excel file
+- Export simulation results to a CSV file
 
 ## Requirements
 
@@ -17,6 +18,10 @@ This project implements a Monte Carlo simulation for trading strategies. The sim
 - Openpyxl
 - Arabic-reshaper
 - Python-bidi
+- Black
+- Pylint
+- Pre-commit
+- Pydocstyle
 
 ## Installation
 
@@ -31,6 +36,16 @@ This project implements a Monte Carlo simulation for trading strategies. The sim
    poetry install
    ```
 
+3. Install pre-commit hooks:
+   ```sh
+   pre-commit install
+   ```
+
+4. Install `pydocstyle` manually:
+   ```sh
+   poetry add --dev pydocstyle
+   ```
+
 ## Usage
 
 Run the simulation with the following command:
@@ -43,6 +58,66 @@ To run the simulation in Persian:
 poetry run python src/main.py --lang fa --strategy variable --show-plot
 ```
 
+To export the results to a CSV file:
+```sh
+poetry run python src/main.py --lang en --strategy fixed --export-csv results.csv
+```
+
+## Code Formatting and Linting
+
+This project uses `black` for code formatting, `pylint` for linting, and `pydocstyle` for docstring conventions. To format and lint your code, run the following commands:
+
+To format the code:
+```sh
+black .
+```
+
+To lint the code:
+```sh
+pylint src/ libs/ tests/
+```
+
+To check docstring conventions:
+```sh
+pydocstyle src/ libs/ tests/
+```
+
+Pre-commit hooks are used to ensure code quality before committing changes. To run the pre-commit hooks manually, use:
+```sh
+pre-commit run --all-files
+```
+
+## Branch Name and Commit Message Conventions
+
+This project enforces branch name styles and commit message conventions using `pre-commit` hooks and `commitizen`.
+
+### Branch Name Convention
+
+Branch names must follow the convention:
+```
+<type>/<description>
+```
+Where `<type>` is one of `feature`, `bugfix`, `hotfix`, or `release`, and `<description>` is a lowercase alphanumeric string with optional dots, underscores, or hyphens.
+
+### Commit Message Convention
+
+Commit messages must follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification and include the author's initials.
+
+To create a commit message, use:
+```sh
+cz commit --author-initials <initials>
+```
+
+To check the commit messages, use:
+```sh
+cz check
+```
+
+To bump the version based on commit messages, use:
+```sh
+cz bump
+```
+
 ## Parameters
 
 - `initial_balance`: The initial trading balance.
@@ -52,6 +127,7 @@ poetry run python src/main.py --lang fa --strategy variable --show-plot
 - `num_trades`: The number of trades.
 - `num_simulations`: The number of simulations.
 - `strategy`: The trading strategy to use (`fixed` or `variable`).
+- `--export-csv`: Optional argument to specify the CSV file path to export the results.
 
 ## Example
 

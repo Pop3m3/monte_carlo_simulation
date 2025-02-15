@@ -21,6 +21,10 @@ python-bidi = "^0.6.3"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
+black = "^25.1.0"
+pre-commit = "^4.1.0"
+pylint = "^3.3.4"
+pydocstyle = "^6.1.1"
 
 [tool.pytest.ini_options]
 testpaths = [

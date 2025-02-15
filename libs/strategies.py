@@ -1,6 +1,24 @@
+"""Module for defining trading strategies."""
+
 import random
 
-def monte_carlo_simulation(initial_balance, risk_percentage, win_rate, reward_to_risk_ratio, num_trades, strategy="fixed"):
+
+def monte_carlo_simulation(params):
+    """Simulate a series of trades using the Monte Carlo method.
+
+    Args:
+        params (dict): A dictionary containing the simulation parameters.
+
+    Returns:
+        list: A list of balances after each trade.
+    """
+    initial_balance = params["initial_balance"]
+    risk_percentage = params["risk_percentage"]
+    win_rate = params["win_rate"]
+    reward_to_risk_ratio = params["reward_to_risk_ratio"]
+    num_trades = params["num_trades"]
+    strategy = params.get("strategy", "fixed")
+
     balance = initial_balance
     balances = [balance]
     results = []
@@ -24,12 +42,14 @@ def monte_carlo_simulation(initial_balance, risk_percentage, win_rate, reward_to
             result = "Loss"
             amount = -risk_amount
 
-        results.append({
-            'Trade Number': trade,
-            'Result': result,
-            'Change in Balance': amount,
-            'New Balance': balance
-        })
+        results.append(
+            {
+                "Trade Number": trade,
+                "Result": result,
+                "Change in Balance": amount,
+                "New Balance": balance,
+            }
+        )
         balances.append(balance)
 
     return balance, balances, results

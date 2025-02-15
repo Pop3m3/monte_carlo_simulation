@@ -1,0 +1,15 @@
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"
+tag_format = "v$version"
+
+[tool.commitizen.schema]
+type = ["feat", "fix", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"]
+scope = "*"
+subject = "*"
+body = "*"
+footer = "*"
+
+[tool.commitizen.settings]
+# Optional settings for commitizen
+message_template = "{{type}}({{scope}}): {{subject}} [{{author_initials}}]"

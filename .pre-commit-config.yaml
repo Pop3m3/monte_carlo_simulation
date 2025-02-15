@@ -1,0 +1,30 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+  - repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v3.0.0a5
+    hooks:
+      - id: pylint
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+  - repo: https://github.com/PyCQA/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.17.12
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+  - repo: local
+    hooks:
+      - id: branch-name
+        name: Branch name must follow the convention
+        entry: bash -c '[[ $(git rev-parse --abbrev-ref HEAD) =~ ^(feature|bugfix|hotfix|release)/[a-z0-9._-]+$ ]]'
+        language: system
+        stages: [commit-msg]
