@@ -1,44 +1,10 @@
-import random
 import matplotlib.pyplot as plt
 import pandas as pd
 import argparse
 import arabic_reshaper
 from bidi.algorithm import get_display
 import time
-
-def monte_carlo_simulation(initial_balance, risk_percentage, win_rate, reward_to_risk_ratio, num_trades, strategy="fixed"):
-    balance = initial_balance
-    balances = [balance]
-    results = []
-
-    for trade in range(1, num_trades + 1):
-        if strategy == "fixed":
-            risk_amount = risk_percentage / 100 * initial_balance
-        elif strategy == "variable":
-            risk_amount = risk_percentage / 100 * balance
-        else:
-            raise ValueError("Unknown strategy")
-
-        reward_amount = reward_to_risk_ratio * risk_amount
-
-        if random.random() < win_rate:
-            balance += reward_amount
-            result = "Win"
-            amount = reward_amount
-        else:
-            balance -= risk_amount
-            result = "Loss"
-            amount = -risk_amount
-
-        results.append({
-            'Trade Number': trade,
-            'Result': result,
-            'Change in Balance': amount,
-            'New Balance': balance
-        })
-        balances.append(balance)
-
-    return balance, balances, results
+from libs.strategies import monte_carlo_simulation
 
 def reshape_text(text):
     reshaped_text = arabic_reshaper.reshape(text)
@@ -50,8 +16,8 @@ def plot_results(all_balances, initial_balance, prompts):
     for balances in all_balances:
         plt.plot(balances, marker='o', alpha=0.5)
     plt.title(prompts["plot_title"])
-    plt.xlabel('Number of Trades')
-    plt.ylabel('Balance')
+    plt.xlabel("Number of Trades")
+    plt.ylabel("Balance")
     plt.grid(True)
     plt.axhline(initial_balance, color='red', linestyle='--', label=prompts["initial_balance_label"])
     plt.legend()

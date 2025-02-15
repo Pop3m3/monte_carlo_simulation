@@ -6,7 +6,8 @@ authors = ["Your Name <you@example.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "src" }
+    { include = "src" },
+    { include = "libs" }
 ]
 
 [tool.poetry.dependencies]
@@ -17,6 +18,14 @@ openpyxl = "^3.1.5"
 arabic-reshaper = "^3.0.0"
 python-bidi = "^0.6.3"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests"
+]
 
 [build-system]
 requires = ["poetry-core"]
