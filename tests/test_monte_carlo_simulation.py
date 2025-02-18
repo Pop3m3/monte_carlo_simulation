@@ -26,3 +26,37 @@ def test_monte_carlo_simulation(test_case):
     assert (
         len(balances) == test_case["num_trades"] + 1
     )  # initial balance + number of trades
+
+
+def test_failing_case_negative_balance():
+    """Test a failing case where the initial balance is negative."""
+    params = {
+        "initial_balance": -1000,
+        "risk_percentage": 1,
+        "win_rate": 0.5,
+        "reward_to_risk_ratio": 2,
+        "num_trades": 10,
+        "strategy": "fixed",
+    }
+    try:
+        balance, balances, results = monte_carlo_simulation(params)
+        assert False, "Simulation should have failed with negative initial balance"
+    except ValueError as e:
+        assert str(e) == "Initial balance must be positive"
+
+
+def test_failing_case_high_risk():
+    """Test a failing case where the risk percentage is too high."""
+    params = {
+        "initial_balance": 1000,
+        "risk_percentage": 100,
+        "win_rate": 0.5,
+        "reward_to_risk_ratio": 2,
+        "num_trades": 10,
+        "strategy": "fixed",
+    }
+    try:
+        balance, balances, results = monte_carlo_simulation(params)
+        assert False, "Simulation should have failed with high risk percentage"
+    except ValueError as e:
+        assert str(e) == "Risk percentage must be less than 100"

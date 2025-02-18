@@ -19,6 +19,11 @@ def monte_carlo_simulation(params):
     num_trades = params["num_trades"]
     strategy = params.get("strategy", "fixed")
 
+    if initial_balance <= 0:
+        raise ValueError("Initial balance must be positive")
+    if risk_percentage >= 100:
+        raise ValueError("Risk percentage must be less than 100")
+
     balance = initial_balance
     balances = [balance]
     results = []
