@@ -118,6 +118,28 @@ To bump the version based on commit messages, use:
 cz bump
 ```
 
+## Commitizen
+
+This project uses Commitizen for conventional commits. To check your commit messages and bump the version, follow these steps:
+
+### Check Commit Messages
+
+To check if your commit messages follow the conventional commit format, run:
+
+```bash
+cz check
+```
+
+### Bump Version
+
+To bump the version based on your commit messages, run:
+
+```bash
+cz bump
+```
+
+This will update the version in your project and create a new commit with the version bump.
+
 ## Parameters
 
 - `initial_balance`: The initial trading balance.
